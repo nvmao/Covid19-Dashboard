@@ -1,6 +1,7 @@
 import React from 'react'
 import {Button,Grid,Box} from '@material-ui/core';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
+import LiveSummaryHead from './LiveSummaryHead/LiveSummaryHead'
 
 
 const styles = {
@@ -8,7 +9,7 @@ const styles = {
         height:'100%'
     }
 }
- 
+   
 interface Props extends WithStyles<typeof styles> {
     children?: React.ReactNode;
     className?: string;
@@ -25,10 +26,7 @@ class Live extends React.Component<Props>{
                     
                     <Grid container className={classes.fullHeight}>
                         <Grid item xs={7} >
-                            <Box width="100%" height="20%">
-                               
-                            </Box>
-
+                            <LiveSummaryHead></LiveSummaryHead>
                             <Box width="100%" height="60%" bgcolor='#02f312'>
                                 what
                             </Box>
