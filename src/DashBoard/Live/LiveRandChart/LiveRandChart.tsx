@@ -1,14 +1,14 @@
 import React from 'react'
-import {Button,Grid,Box} from '@material-ui/core';
+import {Box} from '@material-ui/core';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 
+import GeoChart from '../../../Charts/GeoChart'
 
 const styles = {
-    fullHeight:{
-        background:'#3245f8',
-        width:'100%',
-        height:'100vh',
-        overflow:'hidden',
+    root:{
+        display:'block',
+        borderTop:'1px solid #999999',
+        padding:'10px'
     }
 }
  
@@ -24,10 +24,8 @@ class LiveRanChart extends React.Component<Props>{
         const classes = this.props.classes
 
         return(
-            <Box className={classes.fullHeight}>
-                    
-                   
-
+            <Box width="100%" height="60%" className={classes.root}>
+                <GeoChart></GeoChart>
             </Box>
         )
 
