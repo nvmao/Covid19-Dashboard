@@ -7,9 +7,10 @@ import CountUp from 'react-countup'
 
 const styles = {
     box: {
+        position:'relative' as 'relative',
         margin:'auto',
-        minWidth:'200px',
-        width: '22%',
+        minWidth:'18%',
+        width: '18%',
         height: '69px',
         background:'rgba(196, 196, 196, 0.06)',
         borderRadius: '22px',
@@ -24,7 +25,7 @@ const styles = {
         padding: '13px',
         textAlign:'center' as 'center',
         color: '#CC871F',
-        fontSize: '36px',
+        fontSize: '24px',
         lineHeight: '20px'
     },
     text:{
@@ -34,6 +35,14 @@ const styles = {
         padding: '0',
         textAlign:'center' as 'center',
         color: '#e0e0e0',
+    },
+    miniNumber:{
+        position:'absolute' as 'absolute',
+        textAlign:'center' as 'center',
+        width:'10%',
+        fontSize:'12px',
+        left:'70%',
+        top:'40%'
     }
 }
  
@@ -43,22 +52,25 @@ interface Props extends WithStyles<typeof styles> {
     color?:string
     number:number
     desc:string
+    miniNumber?:number
+}
+
+interface IState{
+    doneCount:boolean
 }
 
 class SummaryBox extends React.Component<Props>{
 
- //(12345.67).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    state={
+        doneCount:false
+    }
 
-                       
 
     render = ()=>{
         const classes = this.props.classes
         
         return(
             <div  className={classes.box} >
-
-
-                   
 
                 <div className={classes.number} 
                 style={{color:this.props.color}}>
@@ -68,6 +80,9 @@ class SummaryBox extends React.Component<Props>{
                         duration={10}
                         delay={0}
                         formattingFn={(number)=>{return number.toLocaleString()}}
+                        onEnd = {({pauseResume, reset, start, update} ) => {
+                            this.setState({doneCount:true})
+                        }} 
                         >
                         {({ countUpRef }) => (
                             <div>
@@ -75,7 +90,8 @@ class SummaryBox extends React.Component<Props>{
                             </div>
                         )}
                     </CountUp>
-
+                        {this.props.miniNumber && this.state.doneCount ?  
+                            <div className={classes.miniNumber}>+{(this.props.miniNumber).toLocaleString()}</div> : ''}
 
                 </div>
                 <div className={classes.text}>{this.props.desc}</div>
