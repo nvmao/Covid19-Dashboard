@@ -3,6 +3,7 @@ import {Button,Grid,Box} from '@material-ui/core';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 import LiveSummaryHead from './LiveSummaryHead/LiveSummaryHead'
 import LiveRandChart from './LiveRandChart/LiveRandChart'
+import LiveCountries from './LiveCountries/LiveCountries'
 
 
 const styles = {
@@ -38,9 +39,7 @@ class Live extends React.Component<Props>{
                         </Grid>
  
                         <Grid item xs={5} >
-                            <Box width="100%" height="100%" bgcolor='#f3f3f3'>
-                                <Button color='primary'>Hello</Button>
-                            </Box>
+                           <LiveCountries></LiveCountries>
                         </Grid>
                     </Grid>
 

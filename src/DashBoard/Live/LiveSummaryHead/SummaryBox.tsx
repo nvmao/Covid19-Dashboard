@@ -77,7 +77,7 @@ class SummaryBox extends React.Component<Props>{
 
                     <CountUp
                         end={this.props.number}
-                        duration={10}
+                        duration={5}
                         delay={0}
                         formattingFn={(number)=>{return number.toLocaleString()}}
                         onEnd = {({pauseResume, reset, start, update} ) => {
