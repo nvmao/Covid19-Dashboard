@@ -55,7 +55,6 @@ class LiveCountries extends React.Component<Props>{
             })
             this.setState({countries:countries})
 
-            console.log(this.state.countries)
         })
     }
 
@@ -65,9 +64,9 @@ class LiveCountries extends React.Component<Props>{
         return(
             <Box width="100%" height="100%" bgcolor='#212022'>
                 <CountriesListLarge countries={this.state.countries.slice(0,this.itemPerLarge)}></CountriesListLarge>
-                <CountriesListSmall countries={this.state.countries.slice(this.itemPerLarge,this.itemPerLarge+15)}></CountriesListSmall>
-                <CountriesListSmall countries={this.state.countries.slice(this.itemPerLarge+this.itemPerSmall,this.itemPerLarge+this.itemPerSmall*2)}></CountriesListSmall>
-                <CountriesListSmall countries={this.state.countries.slice(this.itemPerLarge+this.itemPerSmall*2,this.state.countries.length)}></CountriesListSmall>
+                <CountriesListSmall scroll={false} countries={this.state.countries.slice(this.itemPerLarge,this.itemPerLarge+15)}></CountriesListSmall>
+                <CountriesListSmall scroll={false} countries={this.state.countries.slice(this.itemPerLarge+this.itemPerSmall,this.itemPerLarge+this.itemPerSmall*2)}></CountriesListSmall>
+                <CountriesListSmall scroll countries={this.state.countries.slice(this.itemPerLarge+this.itemPerSmall*2,this.state.countries.length)}></CountriesListSmall>
             </Box>
         )
 
