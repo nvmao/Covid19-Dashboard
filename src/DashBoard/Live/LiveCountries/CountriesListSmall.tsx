@@ -14,7 +14,7 @@ const styles = {
         overflowX:'hidden' as 'hidden',
         width:"20%" ,
         height:"100vh",
-        scrollBehavior:'smooth' as 'smooth'
+        //scrollBehavior:'smooth' as 'smooth'
     },
     '@global':{
         '*::-webkit-scrollbar':{
@@ -42,7 +42,8 @@ interface Props extends WithStyles<typeof styles> {
 class CountriesListLarge extends React.Component<Props>{
 
     el:React.RefObject<HTMLElement> = React.createRef()
-    scrollVal:number = 10000
+    scrollVal:number = 0
+    scrollDirection:number = 1
     scrolling:boolean = true
 
     componentDidMount = ()=>{
@@ -62,24 +63,17 @@ class CountriesListLarge extends React.Component<Props>{
 
                 if(this.scrolling){
                     this.el.current?.scroll(1,this.scrollVal)
-
-                    
-                    console.log("scrollTop: "+ this.el.current.scrollTop)
-                    console.log("scrollHeight: " + this.el.current.scrollHeight)
-                    console.log("offsetHeight: " + this.el.current.offsetHeight)
+                    this.scrollVal += 2 * this.scrollDirection
 
                     if(this.el.current.scrollTop >= (this.el.current.scrollHeight - this.el.current.offsetHeight - 150)){
-                        this.scrollVal = -5   
-                        console.log("yes")
+                        this.scrollDirection = -1  
                     }
                     else if(this.el.current.scrollTop <= 0){
-                        this.scrollVal = 10000  
+                        this.scrollDirection = 1
                     }
-
-                   
                 }
 
-            },1000)
+            },50)
         }
     }
 
