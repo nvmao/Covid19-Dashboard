@@ -4,6 +4,7 @@ import { withStyles, WithStyles } from '@material-ui/core/styles';
 import LiveSummaryHead from './LiveSummaryHead/LiveSummaryHead'
 import LiveRandChart from './LiveRandChart/LiveRandChart'
 import LiveCountries from './LiveCountries/LiveCountries'
+import LiveNews from './LiveNews/LiveNews'
 
 
 const styles = {
@@ -32,9 +33,7 @@ class Live extends React.Component<Props>{
                             
                             <LiveRandChart></LiveRandChart>
 
-                            <Box width="100%" height="20%" bgcolor='#f3f312'>
-                                what
-                            </Box>
+                            <LiveNews></LiveNews>
 
                         </Grid>
  

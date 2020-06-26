@@ -67,7 +67,6 @@ class CountriesListLarge extends React.Component<Props>{
 
                     if(this.el.current.scrollTop >= (this.el.current.scrollHeight - this.el.current.offsetHeight - 150)){
                         this.scrollDirection = -1  
-                        console.log("yes")
                     }
                     else if(this.el.current.scrollTop <= 0){
                         this.scrollDirection = 1
