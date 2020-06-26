@@ -5,7 +5,7 @@ import { withStyles, WithStyles } from '@material-ui/core/styles';
 
 const styles = {
     fullHeight:{
-        background:'#21f534',
+        background:'#3245f8',
         width:'100%',
         height:'100vh',
         overflow:'hidden',
@@ -17,17 +17,15 @@ interface Props extends WithStyles<typeof styles> {
     className?: string;
 }
 
-class FromDay1 extends React.Component<Props>{
+class LiveCountries extends React.Component<Props>{
 
 
     render = ()=>{
         const classes = this.props.classes
 
         return(
-            <Box className={classes.fullHeight}>
-                    
-                   
-
+            <Box width="100%" height="100%" bgcolor='red'>
+                
             </Box>
         )
 
@@ -35,4 +33,4 @@ class FromDay1 extends React.Component<Props>{
 
 }
 
-export default withStyles(styles)(FromDay1)
+export default withStyles(styles)(LiveCountries)

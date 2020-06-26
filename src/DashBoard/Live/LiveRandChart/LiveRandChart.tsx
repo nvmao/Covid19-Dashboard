@@ -2,13 +2,13 @@ import React from 'react'
 import {Box} from '@material-ui/core';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 
+import GeoChart from '../../../Charts/GeoChart'
 
 const styles = {
-    fullHeight:{
-        background:'#21f534',
-        width:'100%',
-        height:'100vh',
-        overflow:'hidden',
+    root:{
+        display:'block',
+        borderTop:'1px solid #999999',
+        padding:'10px'
     }
 }
  
@@ -17,17 +17,15 @@ interface Props extends WithStyles<typeof styles> {
     className?: string;
 }
 
-class FromDay1 extends React.Component<Props>{
+class LiveRanChart extends React.Component<Props>{
 
 
     render = ()=>{
         const classes = this.props.classes
 
         return(
-            <Box className={classes.fullHeight}>
-                    
-                   
-
+            <Box width="100%" height="60%" className={classes.root}>
+                <GeoChart></GeoChart>
             </Box>
         )
 
@@ -35,4 +33,4 @@ class FromDay1 extends React.Component<Props>{
 
 }
 
-export default withStyles(styles)(FromDay1)
+export default withStyles(styles)(LiveRanChart)
