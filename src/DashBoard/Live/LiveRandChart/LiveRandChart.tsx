@@ -3,6 +3,7 @@ import {Box} from '@material-ui/core';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 
 import GeoChart from '../../../Charts/GeoChart'
+import LineChart from '../../../Charts/LineChart'
 
 const styles = {
     root:{
@@ -25,7 +26,8 @@ class LiveRanChart extends React.Component<Props>{
 
         return(
             <Box width="100%" height="60%" className={classes.root}>
-                <GeoChart></GeoChart>
+                {/* <GeoChart></GeoChart> */}
+                <LineChart></LineChart>
             </Box>
         )
 

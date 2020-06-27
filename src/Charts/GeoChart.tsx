@@ -3,6 +3,7 @@ import { withStyles, WithStyles } from '@material-ui/core/styles';
 import Chart from 'react-google-charts'
 import axios from 'axios'
 import ReactLoading from 'react-loading'
+import api from '../API/API'
 
 const styles = {
     root:{
@@ -34,7 +35,7 @@ class GeoChart extends React.Component<Props>{
     }
 
     componentDidMount = ()=>{
-        axios.get('https://corona.lmao.ninja/v2/countries')
+        axios.get(api.SUMMARY_ALL_COUNTRY)
             .then(res=>{
                setTimeout(()=>{
                 let newData = [...this.state.data]
@@ -69,7 +70,7 @@ class GeoChart extends React.Component<Props>{
                     chartType="GeoChart"
                     options={{
                         colorAxis: { colors: ['#db7972', '#b3453d','#991208'] },
-                        backgroundColor: '212022',
+                        backgroundColor: '#212022',
                         datalessRegionColor: '#f8bbd0',
                         defaultColor: '#f5f5f5',
                       }}
