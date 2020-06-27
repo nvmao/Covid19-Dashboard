@@ -4,6 +4,8 @@ import { withStyles, WithStyles } from '@material-ui/core/styles';
 
 import GeoChart from '../../../Charts/GeoChart'
 import LineChart from '../../../Charts/LineChart'
+import PopulationPieChart from '../../../Charts/PopulationPieChart'
+import SummaryPieChart from '../../../Charts/SummaryPieChart'
 
 const styles = {
     root:{
@@ -20,14 +22,39 @@ interface Props extends WithStyles<typeof styles> {
 
 class LiveRanChart extends React.Component<Props>{
 
+    state={
+        currentChart:1
+    }
+    chartList = [<GeoChart></GeoChart>,
+                <LineChart></LineChart>,
+                <PopulationPieChart></PopulationPieChart>,
+                <SummaryPieChart></SummaryPieChart>]
+
+    componentDidMount(){
+        setInterval(()=>{
+            let next = this.state.currentChart + 1;
+            if(next == this.chartList.length ){
+                next = 0
+            }
+            this.setState({currentChart:next})
+        },20000)
+    }
 
     render = ()=>{
         const classes = this.props.classes
 
+
+        const stb = {
+            avocado : 1,
+            banana : 1,
+            milk : 1,
+            oat : '50g',
+            ice : '10sm'
+        }
+
         return(
             <Box width="100%" height="60%" className={classes.root}>
-                {/* <GeoChart></GeoChart> */}
-                <LineChart></LineChart>
+                {this.chartList[this.state.currentChart]}
             </Box>
         )
 

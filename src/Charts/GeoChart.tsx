@@ -37,7 +37,7 @@ class GeoChart extends React.Component<Props>{
     componentDidMount = ()=>{
         axios.get(api.SUMMARY_ALL_COUNTRY)
             .then(res=>{
-               setTimeout(()=>{
+            //    setTimeout(()=>{
                 let newData = [...this.state.data]
                 newData = [['Country Code','Country','Cases']]
 
@@ -51,7 +51,7 @@ class GeoChart extends React.Component<Props>{
 
                 }
                 this.setState({data:newData,loaded:true})
-               },3000)
+            //    },3000)
             })
             .catch(err => {console.log(err)})
     }
