@@ -50,6 +50,7 @@ const styles = {
 interface Props extends WithStyles<typeof styles> {
     children?: React.ReactNode;
     className?: string;
+    location?:Location
 }
 
 interface IState{
@@ -59,14 +60,23 @@ interface IState{
 class NavMenu extends React.Component<Props>{
 
     state = {
-        open : false
+        open : false,
+        click:''
     }
 
     toggleDrawer = () => {
         const state = {...this.state}
         state.open = !state.open
         this.setState({open:state.open})        
-      };
+    }
+
+
+    // componentDidUpdate(prevProps) {
+    //    if(this.state.click.localeCompare('/') != 0){
+    //         clearInterval()
+    //    }
+    // }
+
 
     render = ()=>{
 
@@ -85,33 +95,33 @@ class NavMenu extends React.Component<Props>{
                 </ListItem>
 
                 <ListItem button >
-                    <Link to='/' className={classes.link}>
+                    <Link onClick={()=>{this.setState({click:'/'})}} to='/' className={classes.link}>
                         <ListItemIcon> <InboxIcon color={'primary'}/> </ListItemIcon>
                         <ListItemText>LIVE</ListItemText>
                     </Link>
                      
                 </ListItem>
                 <ListItem button >
-                    <Link to='/graphs' className={classes.link}>
+                    <Link onClick={()=>{this.setState({click:'/graphs'})}} to='/graphs' className={classes.link}>
                         <ListItemIcon> <InboxIcon color={'primary'}/> </ListItemIcon>
                         <ListItemText>GRAPH</ListItemText>
                     </Link>
                 </ListItem>
 
                 <ListItem button >
-                    <Link to='/from-day-1' className={classes.link}>
+                    <Link onClick={()=>{this.setState({click:'from-day-1'})}} to='/from-day-1' className={classes.link}>
                         <ListItemIcon> <InboxIcon color={'primary'}/> </ListItemIcon>
                         <ListItemText>FROM DAY 1</ListItemText>
                     </Link>
                 </ListItem>
                 <ListItem button >
-                    <Link to='/news' className={classes.link}>
+                    <Link onClick={()=>{this.setState({click:'news'})}} to='/news' className={classes.link}>
                         <ListItemIcon> <InboxIcon color={'primary'}/> </ListItemIcon>
                         <ListItemText>NEWS</ListItemText>
                     </Link>
                 </ListItem>
                 <ListItem button >
-                    <Link to='/about' className={classes.link}>
+                    <Link onClick={()=>{this.setState({click:'about'})}} to='/about' className={classes.link}>
                         <ListItemIcon> <InboxIcon color={'primary'}/> </ListItemIcon>
                         <ListItemText>ABOUT</ListItemText>
                     </Link>

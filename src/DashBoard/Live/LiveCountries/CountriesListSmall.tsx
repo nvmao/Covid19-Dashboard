@@ -59,7 +59,11 @@ class CountriesListLarge extends React.Component<Props>{
 
     handleScroll = ()=> {
         if(this.props.scroll){
-            setInterval(()=>{
+            let scrollIterval = setInterval(()=>{
+                if(!this.el.current){
+                    clearInterval(scrollIterval)
+                    return
+                }
 
                 if(this.scrolling){
                     this.el.current?.scroll(1,this.scrollVal)

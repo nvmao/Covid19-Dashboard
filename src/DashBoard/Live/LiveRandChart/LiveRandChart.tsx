@@ -6,6 +6,7 @@ import GeoChart from '../../../Charts/GeoChart'
 import LineChart from '../../../Charts/LineChart'
 import PopulationPieChart from '../../../Charts/PopulationPieChart'
 import SummaryPieChart from '../../../Charts/SummaryPieChart'
+import ContinentsBubleChart from '../../../Charts/ContinentsBubleChart'
 
 const styles = {
     root:{
@@ -23,11 +24,12 @@ interface Props extends WithStyles<typeof styles> {
 class LiveRanChart extends React.Component<Props>{
 
     state={
-        currentChart:1
+        currentChart:0
     }
     chartList = [<GeoChart></GeoChart>,
                 <LineChart></LineChart>,
                 <PopulationPieChart></PopulationPieChart>,
+                <ContinentsBubleChart></ContinentsBubleChart>,
                 <SummaryPieChart></SummaryPieChart>]
 
     componentDidMount(){
@@ -42,15 +44,6 @@ class LiveRanChart extends React.Component<Props>{
 
     render = ()=>{
         const classes = this.props.classes
-
-
-        const stb = {
-            avocado : 1,
-            banana : 1,
-            milk : 1,
-            oat : '50g',
-            ice : '10sm'
-        }
 
         return(
             <Box width="100%" height="60%" className={classes.root}>

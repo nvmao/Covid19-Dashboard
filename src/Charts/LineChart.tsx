@@ -71,7 +71,6 @@ class LineChart extends React.Component<Props>{
                 chartType="LineChart"
                 loader={<div>Loading Chart</div>}
                 data={this.state.data}
-               
                 options={{
                     title:'Coronavirus Global Timeline',
                     legend: {
@@ -84,8 +83,11 @@ class LineChart extends React.Component<Props>{
                     },
                     hAxis: {
                         title: 'Time',
-                        textStyle:{color:'#999999'}
+                        textStyle:{color:'#999999'},
+                        titleTextStyle:{color:'#999'}
+
                     },
+                    datalessRegionColor: '#f8bbd0',
                     vAxis: {
                         title: 'Timeline Global of Coronavirus Pandemic',
                         textStyle:{color:'#999999'},

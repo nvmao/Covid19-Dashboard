@@ -10,7 +10,8 @@ const api = {
     SUMMARY_ALL_COUNTRY: 'https://corona.lmao.ninja/v2/countries',
     TIMELINE_ALL : 'https://corona.lmao.ninja/v2/historical/all?lastdays=all',
     GET_ALL : 'https://corona.lmao.ninja/v2/all',
-    
+    GET_CONTINENTS : 'https://corona.lmao.ninja/v2/continents'
+
 }
  
 export default api
