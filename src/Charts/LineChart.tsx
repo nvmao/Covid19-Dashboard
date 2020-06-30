@@ -19,10 +19,12 @@ const styles = {
 interface Props extends WithStyles<typeof styles> {
     children?: React.ReactNode;
     className?: string;
+    countryCode?:string;
 }
 
 interface IState{
     data:Array<Array<string|number>>
+    countryName?:string
     loaded:boolean
 }
 
@@ -36,7 +38,28 @@ class LineChart extends React.Component<Props>{
     }
 
     componentDidMount = ()=>{
-        axios.get(api.TIMELINE_ALL)
+        if(this.props.countryCode){
+            axios.get(api.TIMELINE_COUNTRY + this.props.countryCode + '?lastdays=all')
+            .then(res=>{
+                let newData:Array<Array<string|number>> = []
+                newData.push(['x','Cases','Deaths','Recovered'])
+
+                let datesCases = Object.keys(res.data.timeline.cases)
+                datesCases.forEach(day=>{
+                    let newDate = []
+                    newDate.push(day)
+                    newDate.push(res.data.timeline.cases[day])
+                    newDate.push(res.data.timeline.deaths[day])
+                    newDate.push(res.data.timeline.recovered[day])
+                    newData.push(newDate)
+                })
+
+                this.setState({data:newData,countryName:res.data.country})
+                console.log(this.state.data)
+            })
+        }
+        else{
+            axios.get(api.TIMELINE_ALL)
             .then(res=>{
                 let newData:Array<Array<string|number>> = []
                 newData = [['x','Cases','Deaths','Recovered']]
@@ -55,7 +78,8 @@ class LineChart extends React.Component<Props>{
                 this.setState({data:newData})
                 console.log(this.state.data)
             })
-            .catch(err => {console.log(err)})
+        }
+       
     }
 
 
@@ -72,7 +96,7 @@ class LineChart extends React.Component<Props>{
                 loader={<div>Loading Chart</div>}
                 data={this.state.data}
                 options={{
-                    title:'Coronavirus Global Timeline',
+                    title:'Coronavirus Timeline - ' + this.props.countryCode ? this.state.countryName : 'global',
                     legend: {
                         textStyle: {
                             color: '#999'

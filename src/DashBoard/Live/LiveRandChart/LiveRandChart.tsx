@@ -8,6 +8,8 @@ import PopulationPieChart from '../../../Charts/PopulationPieChart'
 import SummaryPieChart from '../../../Charts/SummaryPieChart'
 import ContinentsBubleChart from '../../../Charts/ContinentsBubleChart'
 
+import CountrySummaryBarChart from '../../../Charts/Country/CountrySummaryBarChart'
+
 const styles = {
     root:{
         display:'block',
@@ -26,11 +28,14 @@ class LiveRanChart extends React.Component<Props>{
     state={
         currentChart:0
     }
-    chartList = [<GeoChart></GeoChart>,
-                <LineChart></LineChart>,
-                <PopulationPieChart></PopulationPieChart>,
-                <ContinentsBubleChart></ContinentsBubleChart>,
-                <SummaryPieChart></SummaryPieChart>]
+    // chartList = [<GeoChart></GeoChart>,
+    //             <LineChart></LineChart>,
+    //             <PopulationPieChart></PopulationPieChart>,
+    //             <ContinentsBubleChart></ContinentsBubleChart>,
+    //             <SummaryPieChart></SummaryPieChart>]
+
+    chartList = [<LineChart countryCode='jp'></LineChart>,<CountrySummaryBarChart></CountrySummaryBarChart>]
+
 
     componentDidMount(){
         setInterval(()=>{

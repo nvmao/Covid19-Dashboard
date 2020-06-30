@@ -86,6 +86,7 @@ class GeoChart extends React.Component<Props>{
                 <div><ReactLoading  className={classes.loading} color='#999999' type={'bars'} width='100px' height='100px'  /></div>
             )
         }
+        
         return(
             <div className={classes.root}>
                 {chartRender()}
