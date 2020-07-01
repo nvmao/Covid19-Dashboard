@@ -34,7 +34,7 @@ class LiveSummaryHead extends React.Component<Props>{
         const classes = this.props.classes
 
         return(
-            <Box width="100%" height="20%">
+        <Box width="100%" height="20%" style={{borderBottom:'1px solid #999999'}}>
                 <Box width='100%' height='50%' >
                     <div className={classes.header}>CORONAVIRUS PANDEMIC</div>
                     

@@ -18,11 +18,26 @@ interface Props extends WithStyles<typeof styles> {
     className?: string;
 }
 
-class Live extends React.Component<Props>{
+interface IState{
+    countryCode:string
+}
 
+class Live extends React.Component<Props>{
+    state:IState = {
+        countryCode:''
+    }
+
+    handleSelectCountry = (countryCode)=>{
+        this.setState({countryCode:countryCode})
+    }
+    handleRemoveCountry = ()=>{
+        this.setState({countryCode:''})
+    }
 
     render = ()=>{
         const classes = this.props.classes
+
+        console.log('code: '+this.state.countryCode) 
 
         return(
             <Box className={classes.fullHeight}>
@@ -31,14 +46,17 @@ class Live extends React.Component<Props>{
                         <Grid item xs={7} >
                             <LiveSummaryHead></LiveSummaryHead>
                             
-                            <LiveRandChart></LiveRandChart>
+                            <LiveRandChart 
+                                clickCountryBtn={this.handleRemoveCountry} 
+                                countryCode={this.state.countryCode}>
+                            </LiveRandChart>
 
                             <LiveNews></LiveNews>
 
                         </Grid>
  
                         <Grid item xs={5} >
-                           <LiveCountries></LiveCountries>
+                           <LiveCountries handleSelectCountry={this.handleSelectCountry}></LiveCountries>
                         </Grid>
                     </Grid>
 

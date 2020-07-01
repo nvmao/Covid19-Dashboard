@@ -7,7 +7,13 @@ const api = {
     
 
     GET_NEWS : `https://newsapi.org/v2/everything?q=COVID&from=${CURRENT_DATE}&sortBy=publishedAt&apiKey=${APIKEY_APINEWS}&pageSize=80&page=1`,
-    
+    SUMMARY_ALL_COUNTRY: 'https://corona.lmao.ninja/v2/countries',
+    TIMELINE_ALL : 'https://corona.lmao.ninja/v2/historical/all?lastdays=all',
+    TIMELINE_COUNTRY: 'https://corona.lmao.ninja/v2/historical/',
+    GET_ALL : 'https://corona.lmao.ninja/v2/all',
+    GET_COUNTRY:'https://corona.lmao.ninja/v2/countries/',
+    GET_CONTINENTS : 'https://corona.lmao.ninja/v2/continents'
+
 }
  
 export default api

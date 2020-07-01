@@ -13,10 +13,12 @@ const styles = {
 interface Props extends WithStyles<typeof styles> {
     children?: React.ReactNode;
     className?: string;
+    handleSelectCountry:any
 }
 
 interface ICountry{
     country:string,
+    countryCode:string,
     flag:string,
     cases:number,
     deaths:number,
@@ -43,6 +45,7 @@ class LiveCountries extends React.Component<Props>{
             for(let i = 0; i < res.data.length;i++){
                 const country:ICountry ={
                     country:res.data[i].country,
+                    countryCode:res.data[i].countryInfo.iso2,
                     flag:res.data[i].countryInfo.flag,
                     cases:res.data[i].cases,
                     deaths:res.data[i].deaths,
@@ -57,16 +60,16 @@ class LiveCountries extends React.Component<Props>{
 
         })
     }
-
+ 
     render = ()=>{
         const classes = this.props.classes
 
         return(
             <Box width="100%" height="100%" bgcolor='#212022'>
-                <CountriesListLarge countries={this.state.countries.slice(0,this.itemPerLarge)}></CountriesListLarge>
-                <CountriesListSmall scroll={false} countries={this.state.countries.slice(this.itemPerLarge,this.itemPerLarge+15)}></CountriesListSmall>
-                <CountriesListSmall scroll={false} countries={this.state.countries.slice(this.itemPerLarge+this.itemPerSmall,this.itemPerLarge+this.itemPerSmall*2)}></CountriesListSmall>
-                <CountriesListSmall scroll countries={this.state.countries.slice(this.itemPerLarge+this.itemPerSmall*2,this.state.countries.length)}></CountriesListSmall>
+                <CountriesListLarge handleSelectCountry ={this.props.handleSelectCountry} countries={this.state.countries.slice(0,this.itemPerLarge)}></CountriesListLarge>
+                <CountriesListSmall handleSelectCountry ={this.props.handleSelectCountry} scroll={false} countries={this.state.countries.slice(this.itemPerLarge,this.itemPerLarge+15)}></CountriesListSmall>
+                <CountriesListSmall handleSelectCountry ={this.props.handleSelectCountry} scroll={false} countries={this.state.countries.slice(this.itemPerLarge+this.itemPerSmall,this.itemPerLarge+this.itemPerSmall*2)}></CountriesListSmall>
+                <CountriesListSmall handleSelectCountry ={this.props.handleSelectCountry} scroll countries={this.state.countries.slice(this.itemPerLarge+this.itemPerSmall*2,this.state.countries.length)}></CountriesListSmall>
             </Box>
         )
 

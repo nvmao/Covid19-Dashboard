@@ -6,6 +6,9 @@ const styles = {
     root:{
        width:'100%',
        height:'70px',
+       "&:hover":{
+            cursor: 'pointer'
+       }
     },
     descBox:{
         display:'block',
@@ -47,13 +50,18 @@ const styles = {
     },
     detail:{
         marginRight:'4%',
+    },
+    focusBorder:{
+        borderTop:'1px solid #f49932'
     }
 }
  
 interface Props extends WithStyles<typeof styles> {
     children?: React.ReactNode;
     className?: string;
+    click:any;
     country:string,
+    countryCode:string,
     flag:string
     cases:number,
     deaths:number,
@@ -63,11 +71,18 @@ interface Props extends WithStyles<typeof styles> {
 class CountryBox extends React.Component<Props>{
 
 
+    selectCountry = ()=>{
+        console.log('what')
+        this.props.click(this.props.countryCode)
+    }
+
     render = ()=>{
         const classes = this.props.classes
 
+        const rootClassList = [classes.root]
+
         return(
-           <div className={classes.root}>
+           <div onClick={this.selectCountry} className={rootClassList.join(' ')}>
                <div className={classes.descBox}>
                 <img src={this.props.flag} className={classes.flag}></img>
                 <div className={classes.desc}>

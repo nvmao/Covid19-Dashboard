@@ -3,6 +3,7 @@ import { withStyles, WithStyles } from '@material-ui/core/styles';
 import Chart from 'react-google-charts'
 import axios from 'axios'
 import ReactLoading from 'react-loading'
+import api from '../API/API'
 
 const styles = {
     root:{
@@ -34,9 +35,9 @@ class GeoChart extends React.Component<Props>{
     }
 
     componentDidMount = ()=>{
-        axios.get('https://corona.lmao.ninja/v2/countries')
+        axios.get(api.SUMMARY_ALL_COUNTRY)
             .then(res=>{
-               setTimeout(()=>{
+            //    setTimeout(()=>{
                 let newData = [...this.state.data]
                 newData = [['Country Code','Country','Cases']]
 
@@ -50,7 +51,7 @@ class GeoChart extends React.Component<Props>{
 
                 }
                 this.setState({data:newData,loaded:true})
-               },3000)
+            //    },3000)
             })
             .catch(err => {console.log(err)})
     }
@@ -69,9 +70,14 @@ class GeoChart extends React.Component<Props>{
                     chartType="GeoChart"
                     options={{
                         colorAxis: { colors: ['#db7972', '#b3453d','#991208'] },
-                        backgroundColor: '212022',
+                        backgroundColor: '#212022',
                         datalessRegionColor: '#f8bbd0',
                         defaultColor: '#f5f5f5',
+                        animation: {
+                            "startup": true,
+                            duration: 3000,
+                            easing: 'out',
+                        },
                       }}
                     data={this.state.data}
                     // Note: you will need to get a mapsApiKey for your project.
@@ -85,6 +91,7 @@ class GeoChart extends React.Component<Props>{
                 <div><ReactLoading  className={classes.loading} color='#999999' type={'bars'} width='100px' height='100px'  /></div>
             )
         }
+        
         return(
             <div className={classes.root}>
                 {chartRender()}

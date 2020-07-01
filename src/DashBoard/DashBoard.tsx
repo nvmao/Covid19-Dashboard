@@ -22,9 +22,12 @@ const styles = {
 interface Props extends WithStyles<typeof styles> {
     children?: React.ReactNode;
     className?: string;
+    location?:Location;
 }
 
 class DashBoard extends React.Component<Props>{
+
+ 
 
     render = ()=>{
 
@@ -44,4 +47,4 @@ class DashBoard extends React.Component<Props>{
     }
 }
  
-export default withStyles(styles)(DashBoard)
+export default  withStyles(styles)(DashBoard)
