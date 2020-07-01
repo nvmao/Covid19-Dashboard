@@ -22,9 +22,12 @@ const styles = {
 interface Props extends WithStyles<typeof styles> {
     children?: React.ReactNode;
     className?: string;
+    location?:Location;
 }
 
 class DashBoard extends React.Component<Props>{
+
+ 
 
     render = ()=>{
 
@@ -34,14 +37,14 @@ class DashBoard extends React.Component<Props>{
                 <NavMenu></NavMenu>
 
                 <Route path="/" exact component={Live}></Route>
-                <Route path="/graphs" component={Graphs}></Route>
-                <Route path="/from-day-1" component={FromDay1}></Route>
-                <Route path="/news" component={News}></Route>
-                <Route path="/about" component={About}></Route>
+                <Route path="/graphs" exact component={Graphs}></Route>
+                <Route path="/from-day-1" exact component={FromDay1}></Route>
+                <Route path="/news" exact component={News}></Route>
+                <Route path="/about"  exact component={About}></Route>
 
             </div>
         )
     }
 }
  
-export default withStyles(styles)(DashBoard)
+export default  withStyles(styles)(DashBoard)
