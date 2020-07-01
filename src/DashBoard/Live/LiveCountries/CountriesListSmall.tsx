@@ -31,8 +31,10 @@ interface Props extends WithStyles<typeof styles> {
     children?: React.ReactNode
     className?: string
     scroll:boolean
+    handleSelectCountry?:any
     countries?:{
         country:string,
+        countryCode:string,
         flag:string,
         cases:number,
         deaths:number,
@@ -86,7 +88,9 @@ class CountriesListLarge extends React.Component<Props>{
         const renderCountries = this.props.countries?.map(item=>{
             return(
                 <CountryBoxSmall 
+                    click={this.props.handleSelectCountry}
                     country={item.country}
+                    countryCode={item.countryCode}
                     flag={item.flag}
                     cases={item.cases}
                     deaths={item.deaths}
