@@ -105,6 +105,11 @@ class PopulationPieChart extends React.Component<Props>{
                                     color: '#999'
                                 }
                             },
+                            animation: {
+                                "startup": true,
+                                duration: 3000,
+                                easing: 'out',
+                            },
                             pieStartAngle: 2,
                             slices: {
                                 1: { color:'transparent' },
@@ -137,6 +142,11 @@ class PopulationPieChart extends React.Component<Props>{
                                 textStyle: {
                                     color: '#999'
                                 }
+                            },
+                            animation: {
+                                "startup": true,
+                                duration: 3000,
+                                easing: 'out',
                             },
                             pieHole: 0.1,
                             slices: {

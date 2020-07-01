@@ -75,7 +75,7 @@ class SummaryBoxes extends React.Component<Props>{
             <div className={classes.root}>
                <SummaryBox number={this.state.Global.totalConfirmed} miniNumber={this.state.Global.newConfirmed} desc='Confirmed' color='#eeeeee'></SummaryBox>
                <SummaryBox number={this.state.Global.totalDeaths} miniNumber={this.state.Global.newDeaths}   desc='Deaths' color='#B6342C'></SummaryBox>
-               <SummaryBox number={this.state.Global.totalRecovered} miniNumber={this.state.Global.newRecovered} desc='Covers' color='#3E9A3C'></SummaryBox>
+               <SummaryBox number={this.state.Global.totalRecovered} miniNumber={this.state.Global.newRecovered} desc='Recovered' color='#3E9A3C'></SummaryBox>
                <SummaryBox number={this.state.Global.critical} desc='Critical' color='#CC871F'></SummaryBox>
                <SummaryBox number={this.state.Global.countries} desc='Countries' color='#eeeeee'></SummaryBox>
             </div>

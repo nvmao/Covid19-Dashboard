@@ -73,6 +73,11 @@ class GeoChart extends React.Component<Props>{
                         backgroundColor: '#212022',
                         datalessRegionColor: '#f8bbd0',
                         defaultColor: '#f5f5f5',
+                        animation: {
+                            "startup": true,
+                            duration: 3000,
+                            easing: 'out',
+                        },
                       }}
                     data={this.state.data}
                     // Note: you will need to get a mapsApiKey for your project.

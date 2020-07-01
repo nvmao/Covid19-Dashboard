@@ -12,48 +12,89 @@ import CountrySummaryBarChart from '../../../Charts/Country/CountrySummaryBarCha
 
 const styles = {
     root:{
+        position:'relative' as 'relative',
         display:'block',
         borderTop:'1px solid #999999',
-        padding:'10px'
+        padding:'10px',
+        width : "100%" ,
+        height : "60%"
+    },
+    next:{
+        background:'transparent',
+        position:'absolute' as 'absolute',
+        right:'2%',
+        top:0,
+        height:'100%',
+        width:'20%',
+    },
+    prev:{
+        background:'transparent',
+        position:'absolute' as 'absolute',
+        left:0,
+        top:0,
+        height:'100%',
+        width:'20%'
     }
 }
  
 interface Props extends WithStyles<typeof styles> {
-    children?: React.ReactNode;
-    className?: string;
+    
+    children?: React.ReactNode
+    className?: string
+    countryCode?: string|null
+
+}
+
+interface IState{
+    currentChart: number
 }
 
 class LiveRanChart extends React.Component<Props>{
 
-    state={
-        currentChart:0
+    state:IState={
+        currentChart:0,
     }
-    // chartList = [<GeoChart></GeoChart>,
-    //             <LineChart></LineChart>,
-    //             <PopulationPieChart></PopulationPieChart>,
-    //             <ContinentsBubleChart></ContinentsBubleChart>,
-    //             <SummaryPieChart></SummaryPieChart>]
 
-    chartList = [<LineChart countryCode='jp'></LineChart>,<CountrySummaryBarChart></CountrySummaryBarChart>]
+    chartList = [<GeoChart></GeoChart>,
+                <LineChart></LineChart>,
+                <PopulationPieChart></PopulationPieChart>,
+                <ContinentsBubleChart></ContinentsBubleChart>,
+                <SummaryPieChart></SummaryPieChart>]
+
+    // chartList = [<LineChart countryCode='cn'></LineChart>,
+    //              <CountrySummaryBarChart countryCode='cn'></CountrySummaryBarChart>]
 
 
     componentDidMount(){
         setInterval(()=>{
-            let next = this.state.currentChart + 1;
-            if(next == this.chartList.length ){
-                next = 0
-            }
-            this.setState({currentChart:next})
+            this.nextChart()
         },20000)
+    }
+
+    nextChart = ()=>{
+        let next = this.state.currentChart + 1;
+        if(next == this.chartList.length ){
+            next = 0
+        }
+        this.setState({currentChart:next})
+    }
+    prevChart = ()=>{
+        let prev = this.state.currentChart - 1;
+        if(prev  < 0){
+            prev = this.chartList.length - 1;
+        }
+        this.setState({currentChart:prev})
     }
 
     render = ()=>{
         const classes = this.props.classes
 
         return(
-            <Box width="100%" height="60%" className={classes.root}>
+            <div  className={classes.root} >
                 {this.chartList[this.state.currentChart]}
-            </Box>
+                <div className = {classes.prev} onClick={this.prevChart} ></div>
+                <div className = {classes.next} onClick={this.nextChart} ></div>
+            </div>
         )
 
     }

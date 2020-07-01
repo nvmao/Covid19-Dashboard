@@ -111,10 +111,15 @@ class SummaryPieChart extends React.Component<Props>{
                             ['critical', this.state.perMillionChart.critical],
                         ]}
                         options={{
-                            title: 'coronavirus infected per 1 million',
+                            title: 'coronavirus infected rate',
                             backgroundColor: '#212022',
                             titleTextStyle: {
                                 color: '#999'
+                            },
+                            animation: {
+                                "startup": true,
+                                duration: 3000,
+                                easing: 'out',
                             },
                             legend: {
                                 textStyle: {

@@ -27,10 +27,10 @@ const styles = {
 interface Props extends WithStyles<typeof styles> {
     children?: React.ReactNode;
     className?: string;
+    countryCode?:string
 }
 
 interface IState{
-    nameCode:string
     data:{
         name:string,
         cases:number,
@@ -46,7 +46,6 @@ interface IState{
 class CountrySummaryBarChart extends React.Component<Props>{
 
     state:IState={
-        nameCode:'ir',
         data:{
             name:'',
             cases:0,
@@ -60,7 +59,7 @@ class CountrySummaryBarChart extends React.Component<Props>{
     }
 
     componentDidMount = ()=>{
-        axios.get(api.GET_COUNTRY+this.state.nameCode)
+        axios.get(api.GET_COUNTRY+this.props.countryCode)
             .then(res=>{
 
                 const data = {
@@ -108,7 +107,12 @@ class CountrySummaryBarChart extends React.Component<Props>{
                         hAxis: { textStyle:{color:'#999'}, },
                         seriesType: 'bars',
                         series: { 5: { type: 'line' } },
-                        colors:['#999999']
+                        colors:['#999999'],
+                        animation: {
+                            "startup": true,
+                            duration: 3000,
+                            easing: 'out',
+                        },
                     }}
                     rootProps={{ 'data-testid': '1' }}
                     />
@@ -135,7 +139,12 @@ class CountrySummaryBarChart extends React.Component<Props>{
                             hAxis: { textStyle:{color:'#999'}, },
                             seriesType: 'bars',
                             series: { 5: { type: 'line' } },
-                            colors:['#999999']
+                            colors:['#999999'],
+                            animation: {
+                                "startup": true,
+                                duration: 1000,
+                                easing: 'out',
+                            },
                         }}
                         rootProps={{ 'data-testid': '1' }}
                     />

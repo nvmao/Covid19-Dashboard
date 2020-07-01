@@ -116,6 +116,11 @@ class LineChart extends React.Component<Props>{
                         title: 'Timeline Global of Coronavirus Pandemic',
                         textStyle:{color:'#999999'},
                     },
+                    animation: {
+                        "startup": true,
+                        duration: 3000,
+                        easing: 'out',
+                    },
                     backgroundColor:'#212022',
                     defaultColor: '#ffffff',
                     textColor:'#fff'                

@@ -92,6 +92,11 @@ class ContinentsBubleChart extends React.Component<Props>{
                     titleTextStyle: {
                         color: '#999'
                     },
+                    animation: {
+                        "startup": true,
+                        duration: 3000,
+                        easing: 'out',
+                    },
                     bar:{textStyle:{color:'#999'}},
                     legend: {
                         textStyle: {

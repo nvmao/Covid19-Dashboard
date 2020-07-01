@@ -43,7 +43,7 @@ class CountriesListLarge extends React.Component<Props>{
         
 
         return(
-            <Box width="30%" height="100%"  className={classes.root}>
+            <Box width="30%" height="100%" bgcolor='#212022'  className={classes.root}>
                 {renderCountries}
             </Box>
         )
