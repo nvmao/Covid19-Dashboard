@@ -18,14 +18,16 @@ const styles = {
 interface Props extends WithStyles<typeof styles> {
     children?: React.ReactNode;
     className?: string;
+    countryCode:string
 }
 
 interface IState{
     data:Array<Array<string|number>>
+
     loaded:boolean
 }
 
-class GeoChart extends React.Component<Props>{
+class TodayGeoChart extends React.Component<Props>{
 
     state:IState={
         data:[
@@ -59,33 +61,28 @@ class GeoChart extends React.Component<Props>{
 
     render = ()=>{
         const classes = this.props.classes
+        const countryCode = this.props.countryCode
         const loaded = this.state.loaded
         const chartRender = ()=>{
             if(loaded){
                 return(
                     <Chart
-                    width={'98%'}
-                    height={'100%'}
-                    
-                    chartType="GeoChart"
-                    options={{
-                        colorAxis: { colors: ['#db7972', '#b3453d','#991208'] },
-                        backgroundColor: '#212022',
-                        datalessRegionColor: '#f8bbd0',
-                        defaultColor: '#f5f5f5',
-                        animation: {
-                            "startup": true,
-                            duration: 3000,
-                            easing: 'out',
-                        },
-                      }}
-                    // mapsApiKey='AIzaSyDjvK8rI4JyTTllQOBXIka8WxFGh0uFsaY'
-                    data={this.state.data}
-                    // Note: you will need to get a mapsApiKey for your project.
-                    // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-                    // mapsApiKey="YOUR_KEY_HERE"
-                    rootProps={{ 'data-testid': '1' }}
-                  />
+                        width={'98%'}
+                        height={'100%'}
+                        chartType="GeoChart"
+                        data={this.state.data}
+                        options={{
+                            resolution:'provinces',
+                            region: `${countryCode}`,
+                            colorAxis: { colors: ['#db7972', '#b3453d','#991208'] },
+                            backgroundColor: '#212022',
+                            datalessRegionColor: '#f8bbd0',
+                            defaultColor: '#f5f5f5',
+                        }}
+                        // Note: you will need to get a mapsApiKey for your project.
+                        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+                        rootProps={{ 'data-testid': '2' }}
+                    />
                 )
             }
             return(
@@ -103,4 +100,4 @@ class GeoChart extends React.Component<Props>{
 
 }
 
-export default withStyles(styles)(GeoChart)
+export default withStyles(styles)(TodayGeoChart)

@@ -126,6 +126,9 @@ class SummaryPieChart extends React.Component<Props>{
                                     color: '#999'
                                 }
                             },
+                            tooltip: {
+                                trigger: 'both'
+                            },
                             pieHole:0.1,
                             slices: {
                                 0: { offset: 0.3,color:'green' },

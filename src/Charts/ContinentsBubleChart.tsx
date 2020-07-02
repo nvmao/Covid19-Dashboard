@@ -65,7 +65,7 @@ class ContinentsBubleChart extends React.Component<Props>{
                     continents.push(newCotinent)
 
                 }
-                this.setState({continents:continents})
+                this.setState({continents:continents,loaded:true})
             })
             .catch(err => {console.log(err)})
     }
@@ -74,42 +74,53 @@ class ContinentsBubleChart extends React.Component<Props>{
     render = ()=>{
         const classes = this.props.classes
        
+
+        const loaded = this.state.loaded
+        const chartRender = ()=>{
+            if(loaded){
+                return(
+                    <Chart
+                        width={'98%'}
+                        height={'100%'}
+                        chartType="BubbleChart"
+                        loader={<div>Loading Chart</div>}
+                        data={this.state.continents}
+                        options={{
+                            title:
+                            'Correlation between cases and death rate  of continents',
+                            hAxis: { title: 'Cases Rate',textStyle:{color:'#999999'},titleTextStyle:{color:'#999'} },
+                            vAxis: { title: 'Death Rate',textStyle:{color:'#999999'},titleTextStyle:{color:'#999'} },
+                            bubble: { textStyle: { color:'#999' } },
+                            backgroundColor: '#212022',
+                            titleTextStyle: {
+                                color: '#999'
+                            },
+                            animation: {
+                                "startup": true,
+                                duration: 3000,
+                                easing: 'out',
+                            },
+                            bar:{textStyle:{color:'#999'}},
+                            legend: {
+                                textStyle: {
+                                    color: '#999'
+                                }
+                            },
+                            colors:['#6776f9','#2354f1']
+                        }}
+                        rootProps={{ 'data-testid': '1' }}
+                    />
+                )
+            }
+            return(
+                <div><ReactLoading  className={classes.loading} color='#999999' type={'bars'} width='100px' height='100px'  /></div>
+            )
+        }
+        
         return(
             <div className={classes.root}>
-            <Chart
-                width={'98%'}
-                height={'100%'}
-                chartType="BubbleChart"
-                loader={<div>Loading Chart</div>}
-                data={this.state.continents}
-                options={{
-                    title:
-                    'Correlation between cases and death rate  of continents',
-                    hAxis: { title: 'Cases Rate',textStyle:{color:'#999999'},titleTextStyle:{color:'#999'} },
-                    vAxis: { title: 'Death Rate',textStyle:{color:'#999999'},titleTextStyle:{color:'#999'} },
-                    bubble: { textStyle: { color:'#999' } },
-                    backgroundColor: '#212022',
-                    titleTextStyle: {
-                        color: '#999'
-                    },
-                    animation: {
-                        "startup": true,
-                        duration: 3000,
-                        easing: 'out',
-                    },
-                    bar:{textStyle:{color:'#999'}},
-                    legend: {
-                        textStyle: {
-                            color: '#999'
-                        }
-                    },
-                    colors:['#6776f9','#2354f1']
-                }}
-                rootProps={{ 'data-testid': '1' }}
-                />
+                {chartRender()}
             </div>
-            
-            
         )
 
     }

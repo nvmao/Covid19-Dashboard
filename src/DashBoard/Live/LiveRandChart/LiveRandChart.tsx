@@ -7,6 +7,7 @@ import LineChart from '../../../Charts/LineChart'
 import PopulationPieChart from '../../../Charts/PopulationPieChart'
 import SummaryPieChart from '../../../Charts/SummaryPieChart'
 import ContinentsBubleChart from '../../../Charts/ContinentsBubleChart'
+import TodayGeoChart from '../../../Charts/TodayGeoChart'
 
 import CountrySummaryBarChart from '../../../Charts/Country/CountrySummaryBarChart'
 
@@ -72,17 +73,19 @@ class LiveRanChart extends React.Component<Props>{
     }
     interval
 
-    chartList = [<GeoChart></GeoChart>,
+    chartList = [
+                
+                <GeoChart></GeoChart>,
                 <LineChart></LineChart>,
                 <PopulationPieChart></PopulationPieChart>,
                 <ContinentsBubleChart></ContinentsBubleChart>,
                 <SummaryPieChart></SummaryPieChart>]
-
+ 
 
     callInterval = ()=>{
         this.interval = setInterval(()=>{
             this.nextChart()
-        },20000)
+        },10000)
     }
     
     componentDidMount(){
@@ -93,18 +96,29 @@ class LiveRanChart extends React.Component<Props>{
 
         if(this.props.countryCode.localeCompare(nextProps.countryCode) != 0){
             if(nextProps.countryCode.localeCompare('') != 0){
-                this.chartList = [  <LineChart countryCode={nextProps.countryCode}></LineChart>,
-                                    <CountrySummaryBarChart countryCode={nextProps.countryCode}></CountrySummaryBarChart>]
+                this.chartList = [  
+                    <TodayGeoChart countryCode={nextProps.countryCode}></TodayGeoChart>,
+                    <LineChart countryCode={nextProps.countryCode}></LineChart>,                
+                    <CountrySummaryBarChart countryCode={nextProps.countryCode}></CountrySummaryBarChart>]
                 this.nextChart()
             } 
             else{
-                this.chartList = [<GeoChart></GeoChart>,
+                this.chartList = [
+                    <GeoChart></GeoChart>,
                     <LineChart></LineChart>,
                     <PopulationPieChart></PopulationPieChart>,
                     <ContinentsBubleChart></ContinentsBubleChart>,
                     <SummaryPieChart></SummaryPieChart>]
+                this.nextRandomChart()
             }
         }
+    }
+ 
+    nextRandomChart = ()=>{
+        const random = Math.floor(Math.random() * this.chartList.length)
+        this.setState({currentChart:random})
+        clearInterval(this.interval)
+        this.callInterval()
     }
 
     nextChart = ()=>{
