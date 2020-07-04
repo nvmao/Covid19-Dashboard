@@ -1,5 +1,6 @@
 import React from 'react'
 import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { PieChart } from 'react-minimal-pie-chart';
 import Chart from 'react-google-charts'
 import axios from 'axios'
 import ReactLoading from 'react-loading'
@@ -32,9 +33,6 @@ interface Props extends WithStyles<typeof styles> {
 interface IState{
     infectedChart:{
         infected:number,
-        population:number
-    }
-    testChart:{
         active:number,
         tests:number,
         population:number,
@@ -47,9 +45,6 @@ class PopulationPieChart extends React.Component<Props>{
     state:IState={
         infectedChart:{
             infected:0,
-            population:0
-        },
-        testChart:{
             active:0,
             tests:0,
             population:0,
@@ -62,16 +57,13 @@ class PopulationPieChart extends React.Component<Props>{
         axios.get(api.GET_ALL)
             .then(res=>{
                const infected = {
-                   infected:res.data.cases,
-                   population:res.data.population,
-               }
-               const testChart = {
-                active:res.data.active,
-                tests:res.data.tests,
-                population:res.data.population,
+                    infected:res.data.cases,
+                    active:res.data.active,
+                    tests:res.data.tests,
+                    population:res.data.population,
                 }
 
-                this.setState({infectedChart:infected,testChart:testChart})
+                this.setState({infectedChart:infected,loaded:true})
             })
             .catch(err => {console.log(err)})
     }
@@ -80,19 +72,21 @@ class PopulationPieChart extends React.Component<Props>{
     render = ()=>{
         const classes = this.props.classes
         
-       
-        return(
-            <div className={classes.root}>
-                <div className={classes.chart}>
+        const loaded = this.state.loaded
+        const chartRender = ()=>{
+            if(loaded){
+                return(
+                    <div className={classes.root}>
+                        <div className={classes.chart}>
                     <Chart
                         width={'98%'}
                         height={'100%'}
                         chartType="PieChart"
                         loader={<div>Loading Chart</div>}
                         data={[
-                            ['x', 'Population'],
-                            ['population', this.state.infectedChart.population],
-                            ['infected', this.state.infectedChart.infected],
+                            ['x', 'Infected',],
+                            ['Infected', this.state.infectedChart.infected],
+                            ['Test', this.state.infectedChart.tests],
                         ]}
                         options={{
                             title: 'coronavirus infected',
@@ -105,32 +99,25 @@ class PopulationPieChart extends React.Component<Props>{
                                     color: '#999'
                                 }
                             },
-                            animation: {
-                                "startup": true,
-                                duration: 3000,
-                                easing: 'out',
-                            },
-                            pieStartAngle: 2,
+                            pieHole: 0.1,
                             slices: {
-                                1: { color:'transparent' },
+                                1: { offset: 0.2,color:'#f24475' },
+                                0: { offset: 0.6,color:'#99f321' },
                               },
                         }}
                         rootProps={{ 'data-testid': '1' }}
                     />
                 </div>
-                
-                <div className={classes.chart}>
+                        <div className={classes.chart}>
                     <Chart
                         style={{display:'flex'}}
                         width={'98%'}
-                        height={'100%'}
                         chartType="PieChart"
                         loader={<div>Loading Chart</div>}
                         data={[
                             ['x', 'Population'],
                             ['population', this.state.infectedChart.population],
-                            ['active', this.state.testChart.active],
-                            ['testing', this.state.testChart.tests],
+                            ['test', this.state.infectedChart.tests],
                         ]}
                         options={{
                             title: 'coronavirus testing',
@@ -150,20 +137,28 @@ class PopulationPieChart extends React.Component<Props>{
                             },
                             pieHole: 0.1,
                             slices: {
-                                1: { offset: 0.6 },
-                                2: { offset: 0.2 },
-                                0: { offset: 0.1 },
+                                1: { offset: 0.6,color:'#f24475' },
+                                0: { offset: 0.2,color:'#999' },
                               },
                         }}
                         rootProps={{ 'data-testid': '1' }}
                     />
-                </div>
-          
-            </div>
-            
-            
-        )
 
+                </div>
+                   </div>
+
+                )
+            }
+            return(
+                <div className={classes.root}>
+                    <div><ReactLoading  className={classes.loading} color='#999999' type={'bars'} width='100px' height='100px'  /></div>
+                </div>
+            )
+        }
+        
+        return(
+                chartRender()
+        )
     }
 
 }

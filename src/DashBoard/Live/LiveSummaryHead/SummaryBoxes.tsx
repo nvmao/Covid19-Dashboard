@@ -27,7 +27,7 @@ interface IState{
         newRecovered: number,
         totalRecovered: number,
         critical:number,
-        countries:number
+        tests:number
         
     }
 }
@@ -43,7 +43,7 @@ class SummaryBoxes extends React.Component<Props>{
             newRecovered: 0,
             totalRecovered: 0,
             critical:0,
-            countries:0
+            tests:0
         }
        
     }
@@ -60,7 +60,7 @@ class SummaryBoxes extends React.Component<Props>{
                     newRecovered : res.data.todayRecovered,
                     totalRecovered : res.data.recovered,
                     critical : res.data.critical,
-                    countries: res.data.affectedCountries
+                    tests: res.data.tests
                 }
                
 
@@ -77,7 +77,7 @@ class SummaryBoxes extends React.Component<Props>{
                <SummaryBox number={this.state.Global.totalDeaths} miniNumber={this.state.Global.newDeaths}   desc='Deaths' color='#B6342C'></SummaryBox>
                <SummaryBox number={this.state.Global.totalRecovered} miniNumber={this.state.Global.newRecovered} desc='Recovered' color='#3E9A3C'></SummaryBox>
                <SummaryBox number={this.state.Global.critical} desc='Critical' color='#CC871F'></SummaryBox>
-               <SummaryBox number={this.state.Global.countries} desc='Countries' color='#eeeeee'></SummaryBox>
+               <SummaryBox number={this.state.Global.tests} desc='Tests' color='#eeeeee'></SummaryBox>
             </div>
         )
 

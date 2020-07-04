@@ -96,6 +96,7 @@ class LineChart extends React.Component<Props>{
                     data={this.state.data}
                     options={{
                         title:'Coronavirus Timeline - ' + this.props.countryCode ? this.state.countryName : 'global',
+                        chartArea: { width: '70%',height:'70%' },
                         legend: {
                             textStyle: {
                                 color: '#999'

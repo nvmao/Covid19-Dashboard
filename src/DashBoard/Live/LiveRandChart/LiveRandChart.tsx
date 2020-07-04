@@ -8,6 +8,7 @@ import PopulationPieChart from '../../../Charts/PopulationPieChart'
 import SummaryPieChart from '../../../Charts/SummaryPieChart'
 import ContinentsBubleChart from '../../../Charts/ContinentsBubleChart'
 import TodayGeoChart from '../../../Charts/TodayGeoChart'
+import BarChart from '../../../Charts/BarChart'
 
 import CountrySummaryBarChart from '../../../Charts/Country/CountrySummaryBarChart'
 
@@ -74,10 +75,11 @@ class LiveRanChart extends React.Component<Props>{
     interval
 
     chartList = [
-                
+                <PopulationPieChart></PopulationPieChart>,
+                <BarChart></BarChart>,
+                <TodayGeoChart countryCode='VN'></TodayGeoChart>,
                 <GeoChart></GeoChart>,
                 <LineChart></LineChart>,
-                <PopulationPieChart></PopulationPieChart>,
                 <ContinentsBubleChart></ContinentsBubleChart>,
                 <SummaryPieChart></SummaryPieChart>]
  
@@ -89,7 +91,7 @@ class LiveRanChart extends React.Component<Props>{
     }
     
     componentDidMount(){
-        this.callInterval()
+        //this.callInterval()
     }
  
     componentWillReceiveProps(nextProps){
@@ -97,7 +99,7 @@ class LiveRanChart extends React.Component<Props>{
         if(this.props.countryCode.localeCompare(nextProps.countryCode) != 0){
             if(nextProps.countryCode.localeCompare('') != 0){
                 this.chartList = [  
-                    <TodayGeoChart countryCode={nextProps.countryCode}></TodayGeoChart>,
+                    // <TodayGeoChart countryCode={nextProps.countryCode}></TodayGeoChart>,
                     <LineChart countryCode={nextProps.countryCode}></LineChart>,                
                     <CountrySummaryBarChart countryCode={nextProps.countryCode}></CountrySummaryBarChart>]
                 this.nextChart()
@@ -149,18 +151,20 @@ class LiveRanChart extends React.Component<Props>{
 
         return(
             <div  className={classes.root} >
+                   
                 {this.chartList[this.state.currentChart]}
+
                 <div className = {classes.prev} onClick={this.prevChart} ></div>
                 <div className = {classes.next} onClick={this.nextChart} ></div>
-
                 {this.props.countryCode == '' ? '': 
-                <div onClick={this.props.clickCountryBtn} className={classes.countryBtn}>{this.props.countryCode}</div>}
-                 
+                <div onClick={this.props.clickCountryBtn} className={classes.countryBtn}>
+                {this.props.countryCode}</div>}
             </div>
+        
         )
 
     }
-
+ 
 }
 
 export default withStyles(styles)(LiveRanChart)

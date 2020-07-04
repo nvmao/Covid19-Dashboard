@@ -85,7 +85,7 @@ class SummaryPieChart extends React.Component<Props>{
                     critical:res.data.criticalPerOneMillion
                 }
 
-                this.setState({infectedChart:infected,perMillionChart:perMillionChart})
+                this.setState({infectedChart:infected,perMillionChart:perMillionChart,loaded:true})
             })
             .catch(err => {console.log(err)})
     }
@@ -94,10 +94,11 @@ class SummaryPieChart extends React.Component<Props>{
     render = ()=>{
         const classes = this.props.classes
         
-       
-        return(
-            <div className={classes.root}>
-                <div className={classes.chart}>
+        const loaded = this.state.loaded
+        const chartRender = ()=>{
+            if(loaded){
+                return(
+                    <div className={classes.chart}>
                     <Chart
                         width={'98%'}
                         height={'100%'}
@@ -141,8 +142,17 @@ class SummaryPieChart extends React.Component<Props>{
                     />
                 </div>
           
+                )
+            }
+            return(
+                <div><ReactLoading  className={classes.loading} color='#999999' type={'bars'} width='100px' height='100px'  /></div>
+            )
+        }
+        
+        return(
+            <div className={classes.root}>
+                {chartRender()}
             </div>
-            
         )
 
     }
