@@ -69,6 +69,8 @@ class About extends React.Component<Props>{
                     <p>The best way to prevent and slow down transmission is be well informed about the COVID-19 virus, the disease it causes and how it spreads. Protect yourself and others from infection by washing your hands or using an alcohol based rub frequently and not touching your face. </p>
                     <p>The COVID-19 virus spreads primarily through droplets of saliva or discharge from the nose when an infected person coughs or sneezes, so it’s important that you also practice respiratory etiquette (for example, by coughing into a flexed elbow).</p>
                     <p>At this time, there are no specific vaccines or treatments for COVID-19. However, there are many ongoing clinical trials evaluating potential treatments. WHO will continue to provide updated information as soon as clinical findings become available.</p>
+                
+                    <p>Source: WHO</p>
                 </div>
             )
         },
@@ -85,6 +87,8 @@ class About extends React.Component<Props>{
                         <li>Refrain from smoking and other activities that weaken the lungs.</li>
                         <li>Practice physical distancing by avoiding unnecessary travel and staying away from large groups of people.</li>
                     </ul>
+
+                    <p>Source: WHO</p>
                 </div>
             )
         },
@@ -120,6 +124,8 @@ class About extends React.Component<Props>{
                     <p>People with mild symptoms who are otherwise healthy should manage their symptoms at home. </p>
                     <p>On average it takes 5–6 days from when someone is infected with the virus for symptoms to show, however it can take up to 14 days. </p>
 
+
+                    <p>Source: WHO</p>
                 </div>
             )
         }

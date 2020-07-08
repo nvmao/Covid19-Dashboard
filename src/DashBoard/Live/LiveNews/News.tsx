@@ -26,14 +26,21 @@ const styles = {
         color:'#999999',
         padding:'0',
         marginTop:'8px'
+    },
+    image:{
+        width:'100px',
+        minHeight:'90px',
+        float:'none' as 'none',
+        paddingRight:'10px'
     }
-}
+} 
  
 interface Props extends WithStyles<typeof styles> {
     children?: React.ReactNode
     className?: string
     title:string
     url:string
+    imageUrl?:string
     from:string
     published:string
     description:string
@@ -47,8 +54,11 @@ class News extends React.Component<Props>{
 
         return(
             <div className={classes.news}>
+                
                 <a className={classes.title} href={this.props.url} target="_blank" rel="noopener noreferrer"><h3 style={{marginBottom:'1px'}} >{this.props.title}</h3></a>
-                <p className={classes.description}>{this.props.description}</p>
+                <p className={classes.description}>
+                    {this.props.imageUrl ? <img className={classes.image} src={this.props.imageUrl}></img> : ''}
+                    {this.props.description}</p>
                 <h5 className={classes.published}>{this.props.from} - <span> {this.props.published} </span>  </h5>
             </div>
         )
