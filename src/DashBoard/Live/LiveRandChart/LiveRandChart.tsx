@@ -75,9 +75,9 @@ class LiveRanChart extends React.Component<Props>{
     interval
 
     chartList = [
-                <PopulationPieChart></PopulationPieChart>,
                 <BarChart></BarChart>,
                 <TodayGeoChart countryCode='VN'></TodayGeoChart>,
+                <PopulationPieChart></PopulationPieChart>,
                 <GeoChart></GeoChart>,
                 <LineChart></LineChart>,
                 <ContinentsBubleChart></ContinentsBubleChart>,
@@ -91,7 +91,7 @@ class LiveRanChart extends React.Component<Props>{
     }
     
     componentDidMount(){
-        //this.callInterval()
+        this.callInterval()
     }
  
     componentWillReceiveProps(nextProps){
