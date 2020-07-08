@@ -37,7 +37,7 @@ class DashBoard extends React.Component<Props>{
                 <NavMenu></NavMenu>
 
                 <Route path="/" exact component={Live}></Route>
-                <Route path="/graphs" exact component={Graphs}></Route>
+                {/* <Route path="/graphs" exact component={Graphs}></Route> */}
                 <Route path="/from-day-1" exact component={FromDay1}></Route>
                 <Route path="/news" exact component={News}></Route>
                 <Route path="/about"  exact component={About}></Route>

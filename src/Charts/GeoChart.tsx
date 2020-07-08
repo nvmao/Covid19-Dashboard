@@ -79,6 +79,7 @@ class GeoChart extends React.Component<Props>{
                             easing: 'out',
                         },
                       }}
+                    // mapsApiKey='AIzaSyDjvK8rI4JyTTllQOBXIka8WxFGh0uFsaY'
                     data={this.state.data}
                     // Note: you will need to get a mapsApiKey for your project.
                     // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings

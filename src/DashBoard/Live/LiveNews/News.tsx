@@ -47,7 +47,7 @@ class News extends React.Component<Props>{
 
         return(
             <div className={classes.news}>
-                <a className={classes.title} href="https://google.com"><h3 style={{marginBottom:'1px'}} >{this.props.title}</h3></a>
+                <a className={classes.title} href={this.props.url} target="_blank" rel="noopener noreferrer"><h3 style={{marginBottom:'1px'}} >{this.props.title}</h3></a>
                 <p className={classes.description}>{this.props.description}</p>
                 <h5 className={classes.published}>{this.props.from} - <span> {this.props.published} </span>  </h5>
             </div>

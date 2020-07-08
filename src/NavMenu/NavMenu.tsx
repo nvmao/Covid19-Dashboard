@@ -101,12 +101,12 @@ class NavMenu extends React.Component<Props>{
                     </Link>
                      
                 </ListItem>
-                <ListItem button >
+                {/* <ListItem button >
                     <Link onClick={()=>{this.setState({click:'/graphs'})}} to='/graphs' className={classes.link}>
                         <ListItemIcon> <InboxIcon color={'primary'}/> </ListItemIcon>
                         <ListItemText>GRAPH</ListItemText>
                     </Link>
-                </ListItem>
+                </ListItem> */}
 
                 <ListItem button >
                     <Link onClick={()=>{this.setState({click:'from-day-1'})}} to='/from-day-1' className={classes.link}>

@@ -54,8 +54,7 @@ class LineChart extends React.Component<Props>{
                     newData.push(newDate)
                 })
 
-                this.setState({data:newData,countryName:res.data.country})
-                console.log(this.state.data)
+                this.setState({data:newData,countryName:res.data.country,loaded:true})
             })
         }
         else{
@@ -75,8 +74,7 @@ class LineChart extends React.Component<Props>{
                     newData.push(newDate)
                 })
 
-                this.setState({data:newData})
-                console.log(this.state.data)
+                this.setState({data:newData,loaded:true})
             })
         }
        
@@ -86,49 +84,60 @@ class LineChart extends React.Component<Props>{
     render = ()=>{
         const classes = this.props.classes
         
-       
+        const loaded = this.state.loaded
+        const chartRender = ()=>{
+            if(loaded){
+                return(
+                    <Chart
+                    width={'98%'}
+                    height={'100%'}
+                    chartType="LineChart"
+                    loader={<div>Loading Chart</div>}
+                    data={this.state.data}
+                    options={{
+                        title:'Coronavirus Timeline - ' + this.props.countryCode ? this.state.countryName : 'global',
+                        chartArea: { width: '70%',height:'70%' },
+                        legend: {
+                            textStyle: {
+                                color: '#999'
+                            }
+                        },
+                        titleTextStyle: {
+                            color: '#999'
+                        },
+                        hAxis: {
+                            title: 'Time',
+                            textStyle:{color:'#999999'},
+                            titleTextStyle:{color:'#999'}
+    
+                        },
+                        datalessRegionColor: '#f8bbd0',
+                        vAxis: {
+                            title: 'Timeline Global of Coronavirus Pandemic',
+                            textStyle:{color:'#999999'},
+                        },
+                        animation: {
+                            "startup": true,
+                            duration: 3000,
+                            easing: 'out',
+                        },
+                        backgroundColor:'#212022',
+                        defaultColor: '#ffffff',
+                        textColor:'#fff'                
+                        }}
+                    rootProps={{ 'data-testid': '1' }}
+                    />
+                )
+            }
+            return(
+                <div><ReactLoading  className={classes.loading} color='#999999' type={'bars'} width='100px' height='100px'  /></div>
+            )
+        }
+        
         return(
             <div className={classes.root}>
-                <Chart
-                width={'98%'}
-                height={'100%'}
-                chartType="LineChart"
-                loader={<div>Loading Chart</div>}
-                data={this.state.data}
-                options={{
-                    title:'Coronavirus Timeline - ' + this.props.countryCode ? this.state.countryName : 'global',
-                    legend: {
-                        textStyle: {
-                            color: '#999'
-                        }
-                    },
-                    titleTextStyle: {
-                        color: '#999'
-                    },
-                    hAxis: {
-                        title: 'Time',
-                        textStyle:{color:'#999999'},
-                        titleTextStyle:{color:'#999'}
-
-                    },
-                    datalessRegionColor: '#f8bbd0',
-                    vAxis: {
-                        title: 'Timeline Global of Coronavirus Pandemic',
-                        textStyle:{color:'#999999'},
-                    },
-                    animation: {
-                        "startup": true,
-                        duration: 3000,
-                        easing: 'out',
-                    },
-                    backgroundColor:'#212022',
-                    defaultColor: '#ffffff',
-                    textColor:'#fff'                
-                    }}
-                rootProps={{ 'data-testid': '1' }}
-            />
+                {chartRender()}
             </div>
-           
         )
 
     }
