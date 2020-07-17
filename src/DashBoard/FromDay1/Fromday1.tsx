@@ -2,6 +2,7 @@ import React from 'react'
 import {Box} from '@material-ui/core';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 
+
 import TimeLapseChart from './TimeLapseChart'
 
 const styles = {
@@ -35,7 +36,8 @@ class FromDay1 extends React.Component<Props>{
             <Box className={classes.fullHeight}>
                     
                     <div className={classes.root}>
-                        <TimeLapseChart></TimeLapseChart>
+                            <TimeLapseChart></TimeLapseChart>
+                            
                     </div>
 
             </Box>

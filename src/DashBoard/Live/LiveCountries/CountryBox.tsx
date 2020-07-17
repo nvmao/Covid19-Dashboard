@@ -72,8 +72,7 @@ class CountryBox extends React.Component<Props>{
 
 
     selectCountry = ()=>{
-        console.log('what')
-        this.props.click(this.props.countryCode)
+        this.props.click(this.props.countryCode,this.props.country,this.props.flag)
     }
 
     render = ()=>{
@@ -98,7 +97,8 @@ class CountryBox extends React.Component<Props>{
                <div className={classes.details}>
                 <span style={{color:'#eeeeee'}} className={classes.detail}>{this.props.cases.toLocaleString()}</span>
                 <span style={{color:'#B6342C'}} className={classes.detail}>{this.props.deaths.toLocaleString()}</span>
-                <span style={{color:'#3E9A3C'}} className={classes.detail}>{this.props.recovered.toLocaleString()}</span>
+                {this.props.recovered == 0 ? <span style={{color:'#3E9A3C'}}>N/A</span> : <span style={{color:'#3E9A3C'}} className={classes.detail}>{this.props.recovered.toLocaleString()}</span>}
+
                 </div>
            </div>
         )

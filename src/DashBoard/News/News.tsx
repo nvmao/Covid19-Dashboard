@@ -3,12 +3,15 @@ import {Box} from '@material-ui/core';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 import CachedIcon from '@material-ui/icons/Cached';
 import RootRef from '@material-ui/core/RootRef'
+import {Animated} from "react-animated-css";
 
 import axios from 'axios' 
 import api from '../../API/API'
 import News from '../Live/LiveNews/News'
 
-const styles = {
+
+const styles = { 
+   
     fullHeight:{
         width:'100%',
         height:'100vh',
@@ -21,8 +24,9 @@ const styles = {
         color:'#fff',
         fontSize:'48px',
         "&:hover":{
-            cursor: 'pointer'
-        }
+            cursor: 'pointer',
+        },
+        transition:'transform 1s'
     },
     root:{
         position:'relative' as 'relative',
@@ -66,9 +70,23 @@ class NewsRoute extends React.Component<Props>{
     state:IState={
         news:[]
     }
-    el:React.RefObject<HTMLElement> = React.createRef()
+    newsElement:React.RefObject<HTMLElement> = React.createRef()
+    refeshElement:React.RefObject<HTMLElement> = React.createRef()
+    rotate = 120
+
+    getRotateValue = ()=>{
+        if(this.rotate == 360){
+            this.rotate = 0;
+        }
+        else{
+            this.rotate = 360;
+        }
+        return this.rotate;
+    }
 
     fetchData = ()=>{
+        console.log(this.refeshElement.current)
+        this.refeshElement.current.style.transform = `rotate(${this.getRotateValue()}deg)`
         axios.get(api.GET_NEWS)
         .then(res=>{
             let news:Array<INews> = []
@@ -97,15 +115,16 @@ class NewsRoute extends React.Component<Props>{
 
             this.setState({news:news})
 
-            this.el.current.scroll(123,0);
+            this.newsElement.current.scroll(123,0);
         })
     }
 
  
 
     componentDidMount(){
+
         this.fetchData()
-        console.log(this.el)        
+        
     }
 
     render = ()=>{
@@ -123,14 +142,17 @@ class NewsRoute extends React.Component<Props>{
 
         return(
             <Box className={classes.fullHeight}>
-                    <div onClick={this.fetchData}>
-                        <CachedIcon className={classes.refeshIcon}></CachedIcon>
-                    </div>
-                    <RootRef rootRef={this.el}>
+                            <div onClick={this.fetchData}>
+                                <RootRef rootRef={this.refeshElement}>
+                                    <CachedIcon className={classes.refeshIcon}></CachedIcon>
+                                </RootRef>
+                            </div>
+
+                    <RootRef rootRef={this.newsElement}>
                         <div className={classes.root}>
-                            {newsRender}
+                            {newsRender} 
                         </div>
-                    </RootRef>
+                    </RootRef> 
             </Box>
         )
 

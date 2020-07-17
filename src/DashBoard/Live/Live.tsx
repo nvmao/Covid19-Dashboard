@@ -19,25 +19,38 @@ interface Props extends WithStyles<typeof styles> {
 }
 
 interface IState{
-    countryCode:string
+    selectedCountry:{
+        code:string,
+        name:string,
+        flag:string
+    } 
 }
 
 class Live extends React.Component<Props>{
     state:IState = {
-        countryCode:''
+        selectedCountry:{
+            code:'',
+            name:'',
+            flag:''
+        } 
     }
 
-    handleSelectCountry = (countryCode)=>{
-        this.setState({countryCode:countryCode})
+    handleSelectCountry = (countryCode,countryName,countryFlag)=>{
+        const country ={
+            code:countryCode,
+            name:countryName,
+            flag:countryFlag
+        }
+        this.setState({selectedCountry:country})
     }
     handleRemoveCountry = ()=>{
-        this.setState({countryCode:''})
+        const country = {...this.state.selectedCountry}
+        country.code = ''
+        this.setState({selectedCountry:country}) 
     }
 
     render = ()=>{
         const classes = this.props.classes
-
-        console.log('code: '+this.state.countryCode) 
 
         return(
             <Box className={classes.fullHeight}>
@@ -48,7 +61,7 @@ class Live extends React.Component<Props>{
                             
                             <LiveRandChart 
                                 clickCountryBtn={this.handleRemoveCountry} 
-                                countryCode={this.state.countryCode}>
+                                selectedCountry={this.state.selectedCountry}>
                             </LiveRandChart>
 
                             <LiveNews></LiveNews>

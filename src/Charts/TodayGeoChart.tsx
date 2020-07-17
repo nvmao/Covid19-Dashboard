@@ -86,7 +86,7 @@ class TodayGeoChart extends React.Component<Props>{
 
         const markers = this.state.data.map((city) => (
             <Marker  coordinates={[city.coordinates[1],city.coordinates[0]]}>
-            <circle r={10/city.cases} fill="#F00" stroke="#fff" strokeWidth={2} />
+            <circle r={city.cases/10000} fill="#F00" stroke="#fff" strokeWidth={2} />
                 <text
                     textAnchor="middle"
                     y={city.markerOffset}
