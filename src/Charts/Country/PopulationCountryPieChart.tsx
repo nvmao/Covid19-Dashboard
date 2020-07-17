@@ -4,7 +4,7 @@ import { PieChart } from 'react-minimal-pie-chart';
 import Chart from 'react-google-charts'
 import axios from 'axios'
 import ReactLoading from 'react-loading'
-import api from '../API/API'
+import api from '../../API/API'
 
 const styles = {
     root:{
@@ -28,6 +28,7 @@ const styles = {
 interface Props extends WithStyles<typeof styles> {
     children?: React.ReactNode;
     className?: string;
+    countryCode:string;
 }
 
 interface IState{
@@ -40,7 +41,7 @@ interface IState{
     loaded:boolean
 }
 
-class PopulationPieChart extends React.Component<Props>{
+class PopulationCountryPieChart extends React.Component<Props>{
 
     state:IState={
         infectedChart:{
@@ -54,7 +55,7 @@ class PopulationPieChart extends React.Component<Props>{
     }
 
     componentDidMount = ()=>{
-        axios.get(api.GET_ALL)
+        axios.get(api.GET_COUNTRY+this.props.countryCode)
             .then(res=>{
                const infected = {
                     infected:res.data.cases,
@@ -163,4 +164,4 @@ class PopulationPieChart extends React.Component<Props>{
 
 }
 
-export default withStyles(styles)(PopulationPieChart)
+export default withStyles(styles)(PopulationCountryPieChart)
