@@ -1,5 +1,5 @@
 1.npm install
 
-2.npm run
+2.npm start
 
-test deloy : http://covy.surge.sh
+![image](https://user-images.githubusercontent.com/39910660/87847132-bd844780-c8ff-11ea-878f-5b09f4d0410e.png)
